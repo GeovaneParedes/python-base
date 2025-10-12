@@ -3,16 +3,21 @@
 import sys
 import os
 
-if os.path.exists("names.txt"):
-    input(...) #Race condition to check if the file exists
-    names = open("names.txt").readlines()
-if len(names) >= 3:
-    print("Error: The file does not contain enough names.",names[2])
-else:
-    print("Error: The file 'names.txt' does not exist.")
+# EAFP - Easy to ASK Forgiveness than permission
+# (E mais facil pedir perdao do que permisao)
+
+try:
+    names = open("names.txt").readlines() # FileNotFoundError
+except FileNotFoundError as e: # Error por falta do arquivo
+    print("{str(e)}.")
     sys.exit(1)
-if len(names) >= 3:
-    print(names[2])
+    # TODO: Usar Retry
 else:
-    print("[Error]. Missing name in the list.")
+    print("Sucesso!!!")
+finally:
+    print("Execute isso sempre!")
+try:
+    print(names[2])
+except IndexError as e: # Erro indice
+    print(f"{str(e)}.")
     sys.exit(1)

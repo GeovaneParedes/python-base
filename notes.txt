@@ -1,2 +1,5 @@
 Minha primeira Nota	geral	Minha primeira nota
 Minha segunda nota	tecnologia	Python e muito bom, vemm
+Python	python	python e muito bom
+Tech	geral	estou confuso
+Python	tech	Python e muito legal
