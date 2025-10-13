@@ -1,0 +1,5 @@
+# cliente, quarto, dias
+Geovane,1,3
+Dell,2,6
+Fabio,3,7
+Luis,4,5

@@ -1,0 +1,5 @@
+# codigo, nome, preco
+1,Suite Master,500
+2,Quarto Familia,200
+3,Quarto C/casal,100
+4,Quarto C/solteiro,50
