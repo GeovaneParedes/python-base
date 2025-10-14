@@ -50,7 +50,8 @@ with reservations_path.open("r+", encoding="utf-8") as file:
     if room_number in reserved_rooms:
         print("Desculpe, este quarto ja esta reservado.")
     else:
-        room = next((room for room in rooms_path[1:] if room[0] == room_number), None)
+        room = next((room for room in rooms_path[1:] if room[0] == room_number)
+                    , None)
         if room:
             price_per_day = float(room[2])
             total_price = price_per_day * days

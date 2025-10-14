@@ -13,14 +13,15 @@ temp entre 0 e 10: Frio
 temp menor que 0: ALERTA!!! Frio extremo, cuidado com a hipotermia
 '''
 temp = float(input('Informe a temperatura atual: '))
-umidade = float(input('Informe o indice de umidade do ar: '))
+umidade = float(input('Informe o índice de umidade do ar: '))
+
 if temp > 45:
     print('ALERTA!!! Perigo calor extremo')
-elif temp * 3 >= umidade:
-    print('ALERTA!!! Perigo de calor umido')
-elif 10 <= temp <= 30:
+elif temp > 30 and temp * 3 >= umidade:
+    print('ALERTA!!! Perigo de calor úmido')
+elif temp > 10 and temp <= 30:
     print('Normal')
-elif 0 <= temp < 10:
+elif 0 < temp < 10:
     print('Frio')
-else:
+elif temp <= 0:
     print('ALERTA!!! Frio extremo, cuidado com a hipotermia')
