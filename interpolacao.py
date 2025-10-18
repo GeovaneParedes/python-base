@@ -3,17 +3,11 @@
 Nao mande spam, por favor."""
 __version__ = "0.1.0"
 
-email_tmpl = """
-Olá, %(nome)s!
 
-Tem insteresse em aprender Python?
-Python é uma linguagem de programação poderosa e fácil de aprender.
-Se de sejar aprender Python, visite nosso site nossa cumunidade no Telegram %(link)s.
-Apenas agora, temos %(quantidade)s vagas abertas para o curso de Python.
-Preco promocional: R$ %(preco).2f
-"""
 import os
 import sys
+import smtplib
+from email.mime.text import MIMEText
 
 arguments = sys.argv[1:]
 if not arguments:
@@ -21,22 +15,34 @@ if not arguments:
     sys.exit(1)
 
 filename = arguments[0]
+templatename = arguments[1]
 
 path = os.curdir
 filepath = os.path.join(path, filename)
+templatename = os.path.join(path, templatename)
 
-clientes = []
-for line in open(filepath):
-    #TODO: Substituir por list comprehension
-    clientes.append(line.split(","))
+with smtplib.SMTP("localhost", 8025) as server:
+    for line in open(filepath):
+        name, email = line.split(",")
 
+        text = (
+            open(templatename).read()
+            % {
+                "nome": name,
+                "produto": "curso de Python",
+                "texto" : "Aprenda Python conosco",
+                "link": "https://t.me/pythonpraticando",
+                "quantidade": 5,
+                "preco": 49.90,
+            }
+        )
 
+        from_ = "devgegepythonjr@gmailcom"
+        to = ", ".join([email])
+        message = MIMEText(text)
+        message["Subject"] = "Aprenda Python conosco!"
+        message["From"] = from_ 
+        message["To"] = to
 
-for name, email in clientes:
-    #TODO: Substituir por envio de email
-    print(email_tmpl % {
-        "nome": name,
-        "link": "https://t.me/DevProgramador",
-        "quantidade": 10,
-        "preco": 99.90
-    })
+        server.sendmail(from_, [email], message.as_string())
+        

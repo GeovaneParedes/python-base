@@ -1,0 +1,7 @@
+Olá, %(nome)s!
+
+Tem interesse em aprender Python?
+Python é uma linguagem de programação poderosa e fácil de aprender.
+Se desejar aprender Python, visite nosso site nossa comunidade no Telegram %(link)s.
+Apenas agora, temos %(quantidade)s vagas abertas para o curso de Python.
+Preco promocional: R$ %(preco).2f
