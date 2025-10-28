@@ -2,22 +2,23 @@
 
 import sys
 import os
+import logging
 
+log = logging.Logger("erros")
 # EAFP - Easy to ASK Forgiveness than permission
 # (E mais facil pedir perdao do que permisao)
+def try_to_open_a_file(file_path, retry=1) -> list:
+    for attempt in range(1, retry + 1):
+        try:
+            return open(file_path).readlines()
+        except FileNotFoundError as e:
+            log.error("ERROR: %s", e)
+        else:
+            print("Sucesso!!!")
+            return file
+        finally:
+            print("Executando o finally")
+    return []
 
-try:
-    names = open("names.txt").readlines() # FileNotFoundError
-except FileNotFoundError as e: # Error por falta do arquivo
-    print("{str(e)}.")
-    sys.exit(1)
-    # TODO: Usar Retry
-else:
-    print("Sucesso!!!")
-finally:
-    print("Execute isso sempre!")
-try:
-    print(names[2])
-except IndexError as e: # Erro indice
-    print(f"{str(e)}.")
-    sys.exit(1)
+for line in try_to_open_a_file("names.txt"):
+    print(line)
